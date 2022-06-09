@@ -3,6 +3,7 @@ package com.example.composetutorial
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -16,15 +17,16 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ComposeTutorialTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Android")
-                }
-            }
+            MessageCard(Message("Android", "Jetpack Compose"))
+//            ComposeTutorialTheme {
+//                // A surface container using the 'background' color from the theme
+//                Surface(
+//                    modifier = Modifier.fillMaxSize(),
+//                    color = MaterialTheme.colors.background
+//                ) {
+//                    Greeting("Android")
+//                }
+//            }
         }
     }
 }
@@ -39,5 +41,28 @@ fun Greeting(name: String) {
 fun DefaultPreview() {
     ComposeTutorialTheme {
         Greeting("Android")
+    }
+}
+
+@Composable
+fun MessageCard(str: String) {
+    Text(text = str)
+}
+
+@Composable
+fun PreviewMessageCard() {
+    MessageCard("Android")
+}
+
+data class Message(
+    val author: String,
+    val body: String
+)
+
+@Composable
+fun MessageCard(msg: Message) {
+    Column {
+        Text(text = msg.author)
+        Text(text = msg.body)
     }
 }
